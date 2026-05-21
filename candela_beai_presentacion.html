@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candela Del Castillo × BE AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --chocolate: #3D2B1F;
+    --terracotta: #C4704A;
+    --sage: #7A9E7E;
+    --gold: #B8976A;
+    --deep: #1A1208;
+    --muted: #8A7968;
+    --accent-warm: #D4956A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--chocolate);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes lineGrow {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    background: var(--deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(196,112,74,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 70%, rgba(122,158,126,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(184,151,106,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(184,151,106,0.3);
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease 0.2s both;
+  }
+
+  .hero-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--terracotta), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: white;
+    font-weight: 600;
+    margin: 0 auto 36px;
+    animation: fadeIn 1s ease 0.4s both;
+    box-shadow: 0 0 0 8px rgba(196,112,74,0.12), 0 0 0 16px rgba(196,112,74,0.06);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 8vw, 80px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 12px;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 3.5vw, 26px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(245,240,232,0.55);
+    margin-bottom: 48px;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .hero-quote {
+    max-width: 520px;
+    margin: 0 auto 56px;
+    padding: 28px 32px;
+    border: 1px solid rgba(184,151,106,0.2);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    animation: fadeUp 1s ease 0.85s both;
+  }
+
+  .hero-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  .hero-quote span {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1s ease 1s both;
+  }
+
+  .hero-meta-item {
+    text-align: center;
+  }
+  .hero-meta-item strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent-warm);
+  }
+  .hero-meta-item span {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 1s ease 1.5s both;
+  }
+  .hero-scroll span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(184,151,106,0.6), transparent);
+    animation: float 2s ease-in-out infinite;
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  section {
+    padding: 100px 24px;
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--chocolate);
+    margin-bottom: 40px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 32px 0;
+  }
+
+  /* ─── DIAGNOSTICO ─── */
+  #diagnostico {
+    background: var(--deep);
+    max-width: 100%;
+    padding: 100px 24px;
+  }
+
+  #diagnostico .inner {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  #diagnostico .section-title {
+    color: var(--cream);
+  }
+  #diagnostico .section-tag {
+    color: var(--accent-warm);
+  }
+
+  .pain-grid {
+    display: grid;
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .pain-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(184,151,106,0.15);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 4px;
+    padding: 28px 32px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .pain-card:hover {
+    border-left-color: var(--gold);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .pain-card .pain-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(184,151,106,0.25);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .pain-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+
+  .pain-card p {
+    font-size: 15px;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.7;
+  }
+
+  .pain-card .pain-data {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    background: rgba(196,112,74,0.12);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .diagnostico-close {
+    margin-top: 56px;
+    padding: 32px;
+    border: 1px solid rgba(184,151,106,0.2);
+    border-radius: 4px;
+    background: rgba(196,112,74,0.06);
+    text-align: center;
+  }
+  .diagnostico-close p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  /* ─── BENCHMARK ─── */
+  #benchmark {
+    background: var(--cream);
+    max-width: 100%;
+    padding: 100px 24px;
+  }
+  #benchmark .inner {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .comp-cards {
+    display: grid;
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .comp-card {
+    border: 1px solid rgba(61,43,31,0.1);
+    border-radius: 6px;
+    padding: 32px;
+    background: white;
+  }
+
+  .comp-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .comp-handle {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .comp-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--chocolate);
+  }
+
+  .comp-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+  .badge-espejo { background: rgba(122,158,126,0.15); color: var(--sage); }
+  .badge-techo { background: rgba(184,151,106,0.15); color: var(--gold); }
+  .badge-max { background: rgba(196,112,74,0.15); color: var(--terracotta); }
+
+  .comp-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 14px 8px;
+    background: var(--warm-white);
+    border-radius: 4px;
+  }
+  .stat-box strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--terracotta);
+  }
+  .stat-box span {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .comp-insight {
+    font-size: 14px;
+    color: var(--chocolate);
+    line-height: 1.7;
+    padding-top: 16px;
+    border-top: 1px solid rgba(61,43,31,0.08);
+  }
+
+  .comp-insight strong { color: var(--terracotta); }
+
+  .benchmark-close {
+    margin-top: 56px;
+    text-align: center;
+    padding: 32px;
+    border: 2px solid var(--chocolate);
+    border-radius: 4px;
+  }
+  .benchmark-close p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    color: var(--chocolate);
+  }
+
+  /* ─── YA EMPECÉ ─── */
+  #ya-empece {
+    background: var(--warm-white);
+    max-width: 100%;
+    padding: 100px 24px;
+  }
+  #ya-empece .inner { max-width: 840px; margin: 0 auto; }
+
+  .trabajo-grid {
+    display: grid;
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .trabajo-card {
+    position: relative;
+    background: white;
+    border: 1px solid rgba(61,43,31,0.1);
+    border-radius: 6px;
+    padding: 36px 32px 32px;
+    overflow: hidden;
+  }
+
+  .trabajo-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--gold));
+  }
+
+  .trabajo-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .trabajo-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--chocolate);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .trabajo-card p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .trabajo-card .bullet-list {
+    margin-top: 20px;
+    list-style: none;
+  }
+
+  .trabajo-card .bullet-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(61,43,31,0.06);
+    font-size: 14px;
+    color: var(--chocolate);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .trabajo-card .bullet-list li::before {
+    content: '→';
+    color: var(--terracotta);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── ROADMAP ─── */
+  #roadmap {
+    background: var(--deep);
+    max-width: 100%;
+    padding: 100px 24px;
+  }
+  #roadmap .inner { max-width: 840px; margin: 0 auto; }
+  #roadmap .section-title { color: var(--cream); }
+  #roadmap .section-tag { color: var(--accent-warm); }
+
+  .roadmap-track {
+    margin-top: 56px;
+    position: relative;
+  }
+
+  .roadmap-track::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(184,151,106,0.1));
+  }
+
+  .roadmap-phase {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .phase-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,151,106,0.4);
+    background: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  .phase-content {
+    padding-top: 8px;
+  }
+
+  .phase-time {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 8px;
+  }
+
+  .phase-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 14px;
+  }
+
+  .phase-list {
+    list-style: none;
+  }
+
+  .phase-list li {
+    font-size: 14px;
+    color: rgba(245,240,232,0.6);
+    padding: 7px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .phase-list li .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .roadmap-result {
+    margin-top: 16px;
+    padding: 20px 24px;
+    border: 1px solid rgba(184,151,106,0.25);
+    border-radius: 4px;
+    background: rgba(196,112,74,0.07);
+  }
+
+  .roadmap-result p {
+    font-size: 14px;
+    color: var(--accent-warm);
+    font-style: italic;
+  }
+
+  /* ─── CREENCIAS ─── */
+  #creencias {
+    background: var(--warm-white);
+    max-width: 100%;
+    padding: 100px 24px;
+  }
+  #creencias .inner { max-width: 840px; margin: 0 auto; }
+
+  .belief-accordion {
+    margin-top: 48px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .belief-item {
+    border: 1px solid rgba(61,43,31,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .belief-q {
+    padding: 24px 28px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .belief-q p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .belief-q .toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(61,43,31,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    color: var(--muted);
+    transition: all 0.3s ease;
+  }
+
+  .belief-item.open .belief-q .toggle {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: white;
+    transform: rotate(45deg);
+  }
+
+  .belief-a {
+    display: none;
+    padding: 0 28px 24px;
+    background: white;
+  }
+
+  .belief-item.open .belief-a { display: block; }
+
+  .belief-a p {
+    font-size: 15px;
+    color: var(--chocolate);
+    line-height: 1.75;
+    padding-top: 4px;
+    border-top: 1px solid rgba(61,43,31,0.07);
+    padding-top: 16px;
+  }
+
+  .belief-a strong { color: var(--terracotta); }
+
+  /* ─── ACTIVO ─── */
+  #activo {
+    background: var(--cream);
+    max-width: 100%;
+    padding: 100px 24px;
+  }
+  #activo .inner { max-width: 840px; margin: 0 auto; }
+
+  .activo-hero {
+    margin-top: 48px;
+    background: var(--chocolate);
+    border-radius: 8px;
+    padding: 56px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .activo-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(196,112,74,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .activo-hero h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .activo-hero h3 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .activo-hero p {
+    font-size: 16px;
+    color: rgba(245,240,232,0.65);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  .activo-pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 560px) {
+    .activo-pillars { grid-template-columns: 1fr; }
+    .comp-stats { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .pillar-card {
+    background: white;
+    border: 1px solid rgba(61,43,31,0.1);
+    border-radius: 4px;
+    padding: 28px 24px;
+  }
+
+  .pillar-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .pillar-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--chocolate);
+    margin-bottom: 8px;
+  }
+
+  .pillar-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ─── CTA ─── */
+  #cta {
+    background: var(--deep);
+    max-width: 100%;
+    padding: 120px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(196,112,74,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 50%, rgba(122,158,126,0.1) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  #cta .inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  #cta .section-tag { color: var(--accent-warm); }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 7vw, 64px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+
+  .cta-title em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .cta-sub {
+    font-size: 17px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 56px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--terracotta);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 20px 40px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(196,112,74,0.4);
+  }
+
+  .cta-btn:hover {
+    background: var(--accent-warm);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(196,112,74,0.5);
+  }
+
+  .cta-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+
+  .cta-closing {
+    margin-top: 72px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(184,151,106,0.15);
+  }
+
+  .cta-closing p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.5;
+  }
+
+  .cta-closing strong {
+    color: var(--cream);
+    font-style: normal;
+  }
+
+  .sig {
+    margin-top: 36px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26,18,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,151,106,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--cream);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 8px 18px;
+    border: 1px solid rgba(184,151,106,0.4);
+    border-radius: 100px;
+    transition: all 0.3s ease;
+  }
+  .nav-cta:hover {
+    background: rgba(184,151,106,0.12);
+  }
+
+  /* ─── MOBILE TWEAKS ─── */
+  @media (max-width: 640px) {
+    section { padding: 72px 20px; }
+    #diagnostico, #benchmark, #ya-empece, #roadmap, #creencias, #activo, #cta {
+      padding: 72px 20px;
+    }
+    .hero-meta { gap: 24px; }
+    .activo-hero { padding: 40px 24px; }
+    .comp-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BE <span>AI</span></div>
+  <a href="https://wa.me/522205717032?text=Hola%20Alex%2C%20vi%20la%20presentaci%C3%B3n%20y%20me%20interesa%20explorar%20c%C3%B3mo%20podr%C3%ADa%20funcionar%20esto%20para%20m%C3%AD" class="nav-cta" target="_blank">Agendar llamada</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Análisis Confidencial · Mayo 2026</div>
+  <div class="hero-avatar">C</div>
+  <p class="hero-eyebrow">Para · @candelaadelcastillo</p>
+  <h1 class="hero-title">Candela,<br><em>ya vi todo.</em></h1>
+  <p class="hero-sub">Y hay algo importante que quiero mostrarte.</p>
+
+  <div class="hero-quote">
+    <p>"La verdadera espiritualidad se hace responsable."</p>
+    <span>— Candela Del Castillo</span>
+  </div>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <strong>23.5K</strong>
+      <span>Seguidores</span>
+    </div>
+    <div class="hero-meta-item">
+      <strong>3.6%</strong>
+      <span>Engagement</span>
+    </div>
+    <div class="hero-meta-item">
+      <strong>6+</strong>
+      <span>Años de nicho</span>
+    </div>
+    <div class="hero-meta-item">
+      <strong>25</strong>
+      <span>Miembros Skool</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Seguir leyendo</span>
+  </div>
+</section>
+
+<!-- DIAGNOSTICO -->
+<div id="diagnostico">
+<section style="max-width:840px; margin:0 auto; padding:0;">
+  <div class="inner">
+    <span class="section-tag reveal">Lo que vi cuando analicé tu marca</span>
+    <h2 class="section-title reveal">Tienes todo lo que hace<br>falta. <em>El sistema no.</em></h2>
+    <p class="reveal" style="color:rgba(245,240,232,0.6); font-size:16px; max-width:580px; line-height:1.75;">
+      Candela, esto no es una crítica. Es un diagnóstico honesto de alguien que pasó horas revisando tu marca, tu contenido y tu audiencia antes de escribirte.
+    </p>
+
+    <div class="pain-grid">
+
+      <div class="pain-card reveal">
+        <div class="pain-num">01</div>
+        <h3>Tienes 23,500 creyentes y solo 25 pagantes.</h3>
+        <p>Tu engagement del 3.6% está por encima del doble del promedio del nicho. Eso significa que tu audiencia no solo te ve — te escucha, te guarda, te comparte. Pero solo 25 de ellos llegan a tu membresía. Eso no es un problema de autoridad. Es un problema de sistema.</p>
+        <span class="pain-data">Tasa de conversión actual: 0.1%</span>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-num">02</div>
+        <h3>El link en bio lleva a un grupo de WhatsApp. Sin secuencia.</h3>
+        <p>Alguien ve tu reel, le mueve algo por dentro, hace click en el link y llega a un grupo de WhatsApp. Desde ahí, silencio. No hay calentamiento, no hay oferta visible, no hay secuencia. La atención es el activo más frágil del mundo digital — y la estás dejando ir.</p>
+        <span class="pain-data">Leads perdidos por mes: estimado 100–200</span>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-num">03</div>
+        <h3>El "Máster Despliegue" existe. Pero nadie sabe que existe.</h3>
+        <p>Tienes metodología propia, nombre propio, tres fases estructuradas. Eso vale oro en este mercado. Pero en ningún reel mencionas explícitamente el programa. La Skool tiene precio, pero no está comunicado en ningún punto de tu presencia pública. Candela, tienes el producto — solo falta que la gente lo encuentre.</p>
+        <span class="pain-data">Skool indexada en $92/mes — invisible en el funnel</span>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-num">04</div>
+        <h3>Ningún reel tiene un CTA que genere conversación automática.</h3>
+        <p>Tus reels acaban con reflexión. Eso es potente para la marca. Pero ninguno usa palabra clave en comentarios para generar DMs automatizados. Cada vez que publicas un reel de 7,000 views, hay personas que quieren dar el siguiente paso y no saben cuál es.</p>
+        <span class="pain-data">Conversaciones perdidas por reel: ~40–80</span>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-num">05</div>
+        <h3>Todo depende de ti. En tiempo real.</h3>
+        <p>Cuando alguien te escribe, tienes que responder tú. Cuando alguien llega al grupo de WhatsApp, tienes que nutrir tú. Tu sistema de monetización funciona solo cuando Candela está conectada. Eso no es libertad — eso es una jaula dorada con mejor decorado.</p>
+        <span class="pain-data">Operación 100% manual</span>
+      </div>
+
+    </div>
+
+    <div class="diagnostico-close reveal">
+      <p>"No te digo esto para señalarte.<br>Te lo digo porque ya sé exactamente cómo resolverlo."</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BENCHMARK -->
+<div id="benchmark">
+<section style="max-width:840px; margin:0 auto; padding:0;">
+  <div class="inner">
+    <span class="section-tag reveal">Benchmark de tu nicho</span>
+    <h2 class="section-title reveal">Esto es lo que generan<br><em>los que juegan en tu nivel</em></h2>
+    <p class="reveal" style="color:var(--muted); font-size:16px; max-width:580px; line-height:1.75;">
+      Tres perfiles reales de tu mercado. No para que te compares — para que veas exactamente la brecha que existe y lo que la cierra.
+    </p>
+
+    <div class="comp-cards">
+
+      <div class="comp-card reveal">
+        <div class="comp-card-header">
+          <div>
+            <div class="comp-handle">@juanfrendsa</div>
+            <div class="comp-name">Juan Frendsa</div>
+          </div>
+          <div class="comp-badge badge-espejo">Espejo</div>
+        </div>
+        <div class="comp-stats">
+          <div class="stat-box">
+            <strong>353K</strong>
+            <span>Seguidores</span>
+          </div>
+          <div class="stat-box">
+            <strong>~2%</strong>
+            <span>Engagement</span>
+          </div>
+          <div class="stat-box">
+            <strong>Linktree</strong>
+            <span>Funnel</span>
+          </div>
+        </div>
+        <div class="comp-insight">
+          Mismo formato que tú: cara a cámara, tono pausado, reflexivo. Mismo nicho: desarrollo personal y vida interior. La diferencia: tiene un <strong>Linktree estructurado</strong> como hub de conversión con múltiples productos y no depende de un grupo de WhatsApp. Tiene estimado <strong>$15,000–$30,000 USD/mes</strong> en ingresos digitales.
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-card-header">
+          <div>
+            <div class="comp-handle">@anapazoslifecoach</div>
+            <div class="comp-name">Ana Pazos</div>
+          </div>
+          <div class="comp-badge badge-techo">Techo intermedio</div>
+        </div>
+        <div class="comp-stats">
+          <div class="stat-box">
+            <strong>214K</strong>
+            <span>Seguidores</span>
+          </div>
+          <div class="stat-box">
+            <strong>~2.5%</strong>
+            <span>Engagement</span>
+          </div>
+          <div class="stat-box">
+            <strong>398K</strong>
+            <span>Views/reel</span>
+          </div>
+        </div>
+        <div class="comp-insight">
+          Disciplina + espiritualidad + liderazgo femenino — tu mismo terreno. Sus reels de lista numerada con formato "toma screenshot" consiguen <strong>264K–398K views</strong> de forma consistente. Tiene comunidad premium propia, ha salido en Forbes y Vogue. La clave: cada reel tiene un CTA que lleva a algo. Ninguno queda en el aire.
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-card-header">
+          <div>
+            <div class="comp-handle">@nicogrupe</div>
+            <div class="comp-name">Nico Grupe</div>
+          </div>
+          <div class="comp-badge badge-max">Techo máximo</div>
+        </div>
+        <div class="comp-stats">
+          <div class="stat-box">
+            <strong>1M</strong>
+            <span>Seguidores</span>
+          </div>
+          <div class="stat-box">
+            <strong>Bestseller</strong>
+            <span>Autor</span>
+          </div>
+          <div class="stat-box">
+            <strong>"YO"</strong>
+            <span>CTA activo</span>
+          </div>
+        </div>
+        <div class="comp-insight">
+          Su metodología se llama "El Método Faro". La tuya se llama "Máster Despliegue". Esa es la misma jugada — diferente escala. Lo que Nico hace que tú todavía no: en cada reel dice <strong>"comentá YO y te mando la info"</strong>, lo que dispara DMs automáticos con ManyChat. Eso le genera cientos de conversaciones calificadas por semana sin intervención manual.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="benchmark-close reveal">
+      <p>"No estás lejos de ellos.<br>Estás exactamente a <em>un sistema</em> de distancia."</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- YA EMPECÉ -->
+<div id="ya-empece">
+<section style="max-width:840px; margin:0 auto; padding:0;">
+  <div class="inner">
+    <span class="section-tag reveal">Ya empecé a trabajar en tu caso</span>
+    <h2 class="section-title reveal">Esto es lo que haría<br><em>en tus primeros 30 días</em></h2>
+    <p class="reveal" style="color:var(--muted); font-size:16px; max-width:580px; line-height:1.75;">
+      No vine con ideas genéricas. Vine con un diagnóstico específico de tu situación actual y dos palancas concretas que ya identifiqué para ti.
+    </p>
+
+    <div class="trabajo-grid">
+
+      <div class="trabajo-card reveal">
+        <div class="trabajo-label">Palanca #1 — Sistema de Conversación</div>
+        <h3>Activar el "Máster Despliegue" como lead magnet con palabra clave</h3>
+        <p>Tienes una metodología con nombre propio y tres fases claras. Ese es exactamente el tipo de contenido que la gente guarda, comparte y — si hay un sistema detrás — convierte.</p>
+        <ul class="bullet-list">
+          <li>En el próximo reel: "Escribe DESPLIEGUE en los comentarios y te mando acceso a la primera clase gratuita"</li>
+          <li>DM automatizado lleva a una clase de 30 minutos que presenta las 3 fases de tu método</li>
+          <li>Al final de la clase: CTA directo a la membresía Skool</li>
+          <li>Estimado de nuevas conversaciones en los primeros 7 días: 40–80</li>
+        </ul>
+      </div>
+
+      <div class="trabajo-card reveal">
+        <div class="trabajo-label">Palanca #2 — Estructura del Funnel</div>
+        <h3>Reemplazar el WhatsApp group por una secuencia con estructura</h3>
+        <p>El problema no es que uses WhatsApp — es que el grupo no tiene secuencia ni dirección. La atención llega y muere ahí. Esto es lo que se construye en su lugar:</p>
+        <ul class="bullet-list">
+          <li>Link en bio → Linktree con 3 puertas: Clase gratuita | Membresía Skool | Asesoría 1:1</li>
+          <li>Entrada a clase gratuita → captura de email + WhatsApp para secuencia posterior</li>
+          <li>Secuencia de calentamiento de 5 días automatizada con mensajes en tu voz y tu lenguaje</li>
+          <li>Al día 5: invitación directa a la membresía con precio visible y testimonio</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ROADMAP -->
+<div id="roadmap">
+<section style="max-width:840px; margin:0 auto; padding:0;">
+  <div class="inner">
+    <span class="section-tag reveal">Tu ruta con este modelo</span>
+    <h2 class="section-title reveal">Los próximos <em>90 días</em><br>si instalamos el sistema</h2>
+
+    <div class="roadmap-track">
+
+      <div class="roadmap-phase reveal">
+        <div class="phase-dot">1</div>
+        <div class="phase-content">
+          <div class="phase-time">Días 1–30 · Cimientos</div>
+          <h3>El sistema que nunca duerme</h3>
+          <ul class="phase-list">
+            <li><span class="dot"></span>Palabra clave activa en comentarios → DM automático</li>
+            <li><span class="dot"></span>Clase gratuita "Activa tu Máster Despliegue" creada y subida</li>
+            <li><span class="dot"></span>Linktree estructurado reemplaza el link de WhatsApp</li>
+            <li><span class="dot"></span>Secuencia de 5 días en tu voz calienta cada nuevo lead</li>
+            <li><span class="dot"></span>Página de ventas de la membresía visible y activa</li>
+          </ul>
+          <div class="roadmap-result">
+            <p>Resultado esperado: 50–100 leads nuevos en el funnel. 5–10 miembros nuevos en Skool.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase reveal">
+        <div class="phase-dot">2</div>
+        <div class="phase-content">
+          <div class="phase-time">Días 31–60 · Lanzamiento</div>
+          <h3>Tu primer lanzamiento estructurado</h3>
+          <ul class="phase-list">
+            <li><span class="dot"></span>Stories de calentamiento durante 2 semanas (método David Turu)</li>
+            <li><span class="dot"></span>Formulario de audiencia: preguntas que revelan el dolor exacto de tu cliente</li>
+            <li><span class="dot"></span>CastDev con 5–10 personas de tu audiencia para validar el programa intensivo</li>
+            <li><span class="dot"></span>Lanzamiento del programa "Máster Despliegue" de 30 días ($497–997 USD)</li>
+            <li><span class="dot"></span>Meta: 5–15 ventas del programa intensivo</li>
+          </ul>
+          <div class="roadmap-result">
+            <p>Resultado esperado: $2,500–$15,000 USD en el lanzamiento. Skool en 50–80 miembros.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase reveal">
+        <div class="phase-dot">3</div>
+        <div class="phase-content">
+          <div class="phase-time">Días 61–90 · Escala</div>
+          <h3>El sistema trabaja. Tú creas.</h3>
+          <ul class="phase-list">
+            <li><span class="dot"></span>Evergreen: la clase gratuita atrae leads todos los días sin publicidad</li>
+            <li><span class="dot"></span>Agente IA en DMs responde preguntas frecuentes 24/7 en tu tono</li>
+            <li><span class="dot"></span>Skool en crecimiento orgánico con contenido interno semanal</li>
+            <li><span class="dot"></span>Optimización de contenido basada en datos reales de conversión</li>
+            <li><span class="dot"></span>Segundo lanzamiento o apertura de 1:1 con waitlist</li>
+          </ul>
+          <div class="roadmap-result">
+            <p>Resultado esperado: MRR de $7,000–$15,000 USD. Sistema que no depende de que estés en vivo.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CREENCIAS -->
+<div id="creencias">
+<section style="max-width:840px; margin:0 auto; padding:0;">
+  <div class="inner">
+    <span class="section-tag reveal">Lo que quizás piensas</span>
+    <h2 class="section-title reveal">Y por qué es<br><em>diferente ahora</em></h2>
+
+    <div class="belief-accordion">
+
+      <div class="belief-item reveal">
+        <div class="belief-q" onclick="this.parentElement.classList.toggle('open')">
+          <p>"Mis seguidores no son suficientes para monetizar de verdad."</p>
+          <div class="toggle">+</div>
+        </div>
+        <div class="belief-a">
+          <p>Nico Grupe vendió su primer programa con menos de 10,000 seguidores. La cuenta que genera $30,000/mes no es la que tiene más seguidores — es la que tiene mejor sistema. <strong>Tú tienes 23,500 personas con 3.6% de engagement en un nicho de transformación personal.</strong> Eso es exactamente el perfil de audiencia que compra productos de cambio real. No te faltan seguidores — te falta la puerta que les dice dónde ir.</p>
+        </div>
+      </div>
+
+      <div class="belief-item reveal">
+        <div class="belief-q" onclick="this.parentElement.classList.toggle('open')">
+          <p>"La IA va a hacer que mi contenido se sienta artificial o falso."</p>
+          <div class="toggle">+</div>
+        </div>
+        <div class="belief-a">
+          <p>Lo que se siente artificial no es la IA — es usarla sin criterio. El modelo que propongo no reemplaza tu voz: la amplifica. <strong>Tú sigues siendo la cara, la filosofía y el corazón de "Disciplina Es Amor".</strong> La IA se encarga de lo que no debería depender de ti: responder DMs a las 2am, enviar la clase gratuita, hacer el seguimiento del lead que preguntó y nunca compró. Eso no es artificial — eso es liberarte para hacer lo que solo tú puedes hacer.</p>
+        </div>
+      </div>
+
+      <div class="belief-item reveal">
+        <div class="belief-q" onclick="this.parentElement.classList.toggle('open')">
+          <p>"Esto es para marcas grandes con equipos. Yo soy una persona sola."</p>
+          <div class="toggle">+</div>
+        </div>
+        <div class="belief-a">
+          <p>Exactamente por eso. <strong>Este modelo fue diseñado para creadores individuales con autoridad real y sin estructura.</strong> No necesitas un equipo de 10 personas. Necesitas un sistema que opere como si lo tuvieras. El Shadow Operator trabaja detrás de escena — tú sigues siendo el único nombre visible. La diferencia es que deja de depender de tu tiempo para funcionar.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ACTIVO -->
+<div id="activo">
+<section style="max-width:840px; margin:0 auto; padding:0;">
+  <div class="inner">
+    <span class="section-tag reveal">Lo que te propongo</span>
+    <h2 class="section-title reveal">No un servicio.<br><em>Un activo que trabaja por ti.</em></h2>
+
+    <div class="activo-hero reveal">
+      <h3>Tienes talento atrapado en una operación<br>que depende <em>100% de tu tiempo.</em><br>Eso tiene solución.</h3>
+      <p>
+        Lo que construimos juntos no es "gestión de redes". Es un sistema de atracción, confianza y venta que trabaja aunque Candela no esté conectada. Yo opero desde las sombras — tú brillas al frente.
+      </p>
+    </div>
+
+    <div class="activo-pillars">
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">🎙</div>
+        <h4>Tu voz. Sin tu tiempo.</h4>
+        <p>Agente IA entrenado con tu vocabulario, tu tono y tu filosofía responde en DMs 24/7. "Disciplina Es Amor" nunca duerme.</p>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">🌱</div>
+        <h4>Leads que se calientan solos.</h4>
+        <p>Secuencia automatizada que lleva a cada persona desde el primer contacto hasta la decisión de compra, sin que tengas que hacer seguimiento manual.</p>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">📈</div>
+        <h4>Ingresos recurrentes reales.</h4>
+        <p>El objetivo no es un pico de ventas — es construir una membresía que crezca sola y un programa que puedas lanzar dos veces al año con conversiones predecibles.</p>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">🔦</div>
+        <h4>Tú al frente. Yo detrás.</h4>
+        <p>Modelo Shadow Operator: construyo el sistema, lo opero y lo optimizo. Tu nombre y tu marca son los únicos que aparecen. Yo soy invisible.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CTA -->
+<div id="cta">
+  <div class="inner">
+    <span class="section-tag reveal" style="display:block; margin-bottom:16px;">El siguiente paso</span>
+    <h2 class="cta-title reveal">¿Quieres ver cómo se vería<br><em>esto en tu caso?</em></h2>
+    <p class="cta-sub reveal">
+      Una llamada de 30 minutos. Sin presión. Sin precio todavía.<br>Solo quiero mostrarte exactamente qué haría con tu situación actual y qué se podría construir en los próximos 90 días.
+    </p>
+    <div class="reveal">
+      <a
+        href="https://wa.me/522205717032?text=Hola%20Alex%2C%20vi%20la%20presentaci%C3%B3n%20de%20BE%20AI%20y%20me%20interesa%20explorar%20c%C3%B3mo%20podr%C3%ADa%20funcionar%20esto%20para%20m%C3%AD%20y%20mi%20comunidad%20Disciplina%20Es%20Amor."
+        class="cta-btn"
+        target="_blank"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Hablar con Alex por WhatsApp
+      </a>
+    </div>
+
+    <div class="cta-closing reveal">
+      <p>
+        <em>"Cuando tú cambias, todo cambia."</em><br><br>
+        Eso lo dices tú, Candela. Y es verdad.<br>
+        <strong>El sistema que te falta no cambia quién eres — libera todo lo que ya eres.</strong>
+      </p>
+      <div class="sig">Alex Mike · BE AI · Shadow Operator</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Intersection Observer para reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
